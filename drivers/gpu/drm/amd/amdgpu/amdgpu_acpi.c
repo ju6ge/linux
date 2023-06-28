@@ -911,29 +911,8 @@ void amdgpu_acpi_fini(struct amdgpu_device *adev)
  */
 static bool amdgpu_atif_pci_probe_handle(struct pci_dev *pdev)
 {
-	char acpi_method_name[255] = { 0 };
-	struct acpi_buffer buffer = {sizeof(acpi_method_name), acpi_method_name};
-	acpi_handle dhandle, atif_handle;
-	acpi_status status;
-	int ret;
-
-	dhandle = ACPI_HANDLE(&pdev->dev);
-	if (!dhandle)
-		return false;
-
-	status = acpi_get_handle(dhandle, "ATIF", &atif_handle);
-	if (ACPI_FAILURE(status))
-		return false;
-
-	amdgpu_acpi_priv.atif.handle = atif_handle;
-	acpi_get_name(amdgpu_acpi_priv.atif.handle, ACPI_FULL_PATHNAME, &buffer);
-	DRM_DEBUG_DRIVER("Found ATIF handle %s\n", acpi_method_name);
-	ret = amdgpu_atif_verify_interface(&amdgpu_acpi_priv.atif);
-	if (ret) {
-		amdgpu_acpi_priv.atif.handle = 0;
-		return false;
-	}
-	return true;
+	DRM_DEBUG_DRIVER("Entered amdgpu_atif_pci_probe_handle");
+	return false;
 }
 
 /**
